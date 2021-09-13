@@ -1,0 +1,32 @@
+parent(anna, margaret).
+parent(oleg, margaret).
+parent(petr, thomas).
+parent(diana, thomas).
+parent(ivan, john).
+parent(diana, john).
+parent(margaret, christopher).
+parent(thomas, christopher).
+man(oleg).
+man(petr).
+man(ivan).
+man(thomas).
+man(john).
+man(christopher).
+woman(anna).
+woman(diana).
+woman(margaret).
+mother(X, Y):-parent(X, Y), woman(X).
+father(X, Y):-parent(X, Y), man(X).
+brother(X, Y):-parent(Z, X), parent(Z, Y), man(Y).
+wife(X, Y):-parent(X, Z), parent(Y, Z), woman(X).
+b_s(X, Y):-parent(Z, X), parent(Z, Y).
+grand_pa(X, Y):-parent(Z, X), parent(Y, Z), man(Y).
+grand_ma(X, Y):-parent(Z, X), parent(Y, Z), woman(Y).
+grand_son(X, Y):-parent(Z, X), parent(Y, Z), man(X).
+grand_da(X, Y):-parent(Z, X), parent(Y, Z), woman(X).
+grand_pas(X):-grand_pa(X, Z), write(Z).
+grand_mas(X):-grand_ma(X, Z), write(Z).
+grand_pa_and_son(X, Y):-grand_pa(X, Y); grand_pa(Y, X).
+grand_ma_and_son(X, Y):-grand_ma(Y, X), grand_son(Y, X);grand_ma(X, Y), grand_son(X, Y).
+uncle(X, Y):-parent(Z, Y), brother(Z, X), man(X).
+plem(X, Y):-parent(Z, X), brother(Z, Y), man(Y).
