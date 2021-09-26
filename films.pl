@@ -9,6 +9,7 @@ male(dali, 1).
 male(davinci, 1).
 male(olga, 0).
 male(esenin, 1).
+male(gagarin, 1).
 
 astronaut(tolstoy, 0).
 astronaut(napoleon, 0).
@@ -34,6 +35,7 @@ beard(dali, 1).
 beard(davinci, 1).
 beard(olga, 0).
 beard(esenin, 0).
+beard(gagarin, 0).
 
 writer(tolstoy, 1).
 writer(napoleon, 0).
@@ -46,6 +48,7 @@ writer(dali, 0).
 writer(davinci, 0).
 writer(olga, 0).
 writer(esenin, 0).
+writer(gagarin, 0).
 
 highpolitician(tolstoy, 0).
 highpolitician(napoleon, 1).
@@ -208,7 +211,8 @@ checkq12(X12):-X12>0->write("gagarin");write("not_gagarin").
 
 
 pr:-	question1(X1),question2(X2),question3(X3),question12(X12),
-		question4(X4),checkq12(X12),
+		X12>0->male(X,X1),beard(X,X2),writer(X,X3),
+		astronaut(X,X12),write(X);question4(X4),
 		question5(X5),question6(X6),question7(X7),
 		question8(X8),question11(X11),
 		male(X,X1),beard(X,X2),writer(X,X3),highpolitician(X,X4),
