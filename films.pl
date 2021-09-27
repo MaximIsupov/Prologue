@@ -10,6 +10,8 @@ male(davinci, 1).
 male(olga, 0).
 male(esenin, 1).
 male(gagarin, 1).
+male(lukrecia, 0).
+male(kafka, 1).
 
 astronaut(tolstoy, 0).
 astronaut(napoleon, 0).
@@ -23,6 +25,7 @@ astronaut(davinci, 0).
 astronaut(olga, 0).
 astronaut(esenin, 0).
 astronaut(gagarin, 1).
+astronaut(kafka, 0).
 
 beard(tolstoy, 1).
 beard(napoleon, 0).
@@ -36,6 +39,7 @@ beard(davinci, 1).
 beard(olga, 0).
 beard(esenin, 0).
 beard(gagarin, 0).
+beard(kafka, 0).
 
 writer(tolstoy, 1).
 writer(napoleon, 0).
@@ -49,6 +53,7 @@ writer(davinci, 0).
 writer(olga, 0).
 writer(esenin, 0).
 writer(gagarin, 0).
+writer(kafka, 1).
 
 highpolitician(tolstoy, 0).
 highpolitician(napoleon, 1).
@@ -61,6 +66,7 @@ highpolitician(dali, 0).
 highpolitician(davinci, 0).
 highpolitician(olga, 1).
 highpolitician(esenin, 0).
+highpolitician(kafka, 0).
 
 warparticipant(tolstoy, 0).
 warparticipant(napoleon, 1).
@@ -73,6 +79,7 @@ warparticipant(dali, 0).
 warparticipant(davinci, 0).
 warparticipant(olga, 1).
 warparticipant(esenin, 0).
+warparticipant(kafka, 0).
 
 poet(tolstoy, 0).
 poet(napoleon, 0).
@@ -85,6 +92,7 @@ poet(dali, 0).
 poet(davinci, 0).
 poet(olga, 0).
 poet(esenin, 1).
+poet(kafka, 0).
 
 middleage(tolstoy, 0).
 middleage(napoleon, 0).
@@ -97,6 +105,7 @@ middleage(dali, 0).
 middleage(davinci, 1).
 middleage(olga, 1).
 middleage(esenin, 0).
+middleage(kafka, 0).
 
 newage(tolstoy, 1).
 newage(napoleon, 1).
@@ -109,6 +118,7 @@ newage(dali, 1).
 newage(davinci, 0).
 newage(olga, 0).
 newage(esenin, 1).
+newage(kafka, 1).
 
 europe(tolstoy, 1).
 europe(napoleon, 1).
@@ -145,7 +155,10 @@ artist(dali, 1).
 artist(davinci, 1).
 artist(olga, 0).
 artist(esenin, 0).
+artist(kafka, 0).
 
+german(kafka, 0).
+german(remark, 1).
 
 question1(X1):-	write("Is your character male?"),nl,
 				write("1. Yes"),nl,
@@ -207,7 +220,13 @@ question12(X12):-write("Was your character an astronaut?"),nl,
 				write("0. No"),nl,
 				read(X12).
 
-checkq12(X12):-X12>0->write("gagarin");write("not_gagarin").
+question13(X13):-write("Was your character born in Germany?"),nl, 
+				write("1. Yes"),nl,
+				write("0. No"),nl,
+				read(X13).
+
+checkq12(X1,X2,X3,X4,X5,X6,X7,X8,X11,X):-X1=1,X2=0,X3=1,X4=0,X5=0,X6=0,X7=0,X8=1,X11=0->
+		question13(X13),german(X,X13),write(X);write(X).		
 
 
 pr:-	question1(X1),question2(X2),question3(X3),question12(X12),
@@ -218,4 +237,4 @@ pr:-	question1(X1),question2(X2),question3(X3),question12(X12),
 		male(X,X1),beard(X,X2),writer(X,X3),highpolitician(X,X4),
 		warparticipant(X,X5),poet(X,X6),middleage(X,X7),
 		newage(X,X8),artist(X, X11),
-		write(X).
+		checkq12(X1,X2,X3,X4,X5,X6,X7,X8,X11,X).
